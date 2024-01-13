@@ -1,8 +1,5 @@
 import polars as pl
 import numpy as np
-import os
-
-print(os.getcwd())
 
 
 ####
@@ -33,7 +30,6 @@ letter_to_num = {
 
 cust = pl.read_csv('2023//5784/noahs-customers.csv')
 
-# cust = cust.select('*', pl.col('name').str.replace_all(r"\b(?:II|III|IV|Jr\.|Sr\.)\b","").str.to_lowercase().alias('lower_name'))
 cust = cust.select('*', 
                    pl.col('name').str.replace_all(r"(?:Jr\.|Sr\.|III$|II$|IV$|V$)","").str.strip().str.to_lowercase().alias('fixed_name'))
 
